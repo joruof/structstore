@@ -57,7 +57,9 @@ pybind11::class_<T> register_pystruct(pybind11::module_& m, const char* name, py
         return YAML::Dump(to_yaml(store));
     });
     cls.def("to_str", [](T& store) {
-        return (std::ostringstream() << store).str();
+        std::ostringstream os;
+        os << store;
+        return os.str();
     });
     cls.def("to_dict", [](T& store) {
         return to_dict(store);
